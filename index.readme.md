@@ -15,3 +15,7 @@ Then we are simply echoing the *$IndexTemplate* object in our "index.php".
 
 All details about the Template class are in [Template.read.md](https://github.com/guardianangel0507/vrms/tree/development/lib/utility/Template.readme.md) file.
 
+
+### Animate.css Framework
+Please visit [Animate.css](https://animate.style/).
+Read more about the usage there. Check [bootstrap/css](https://github.com/guardianangel0507/vrms/tree/development/assets/bootstrap/css) folder to find the animate.css framework stylesheet. download and paste it into your respective folder to use it.
