@@ -234,6 +234,8 @@ footer .social {
 
 #auth{
   grid-column: 8/9;
+  padding-top: 20px;
+  font-size: 1.2em;
 }
 
 /* Small Tablet Styles */
@@ -280,6 +282,8 @@ footer .social {
 
   #auth{
     grid-column: 8/9;
+    padding-top: 20px;
+    font-size: 1.2em;
   }
 }
 
