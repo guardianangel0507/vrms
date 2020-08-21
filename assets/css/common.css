@@ -1,0 +1,12 @@
+.nav-button {
+    margin: 3px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    padding-right: 10px;
+}
