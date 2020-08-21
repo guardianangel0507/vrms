@@ -3,8 +3,8 @@
 
 // Database Parameters
 define("DB_HOST", "127.0.0.1");
-define("DB_USER", "amrameen769");
-define("DB_PASS", "7025");
+define("DB_USER", "angel");
+define("DB_PASS", "0507");
 define("DB_NAME", "db_vrms");
 
 //Site Details
