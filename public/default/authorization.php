@@ -11,7 +11,7 @@
     </form>
 </div>
 <script>
-    $(document).ready(function () {
+    $(function () {
         switchAuth();
     });
 </script>
