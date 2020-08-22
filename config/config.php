@@ -14,3 +14,5 @@ define("SITE_URL", $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'] 
 
 // Default Timezone
 date_default_timezone_set("Asia/Kolkata");
+//Session Started Globally for the System
+session_start();
