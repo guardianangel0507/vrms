@@ -1,12 +1,19 @@
 .nav-button {
     margin: 3px;
 }
-
-footer {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    bottom: 0;
+.footer {
+    padding: 1.2rem 0;
+    color: #999;
     text-align: center;
-    padding-right: 10px;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+.footer p:last-child {
+    margin-bottom: 0;
+}
+
+.backtotop{
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
 }

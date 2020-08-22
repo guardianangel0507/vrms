@@ -15,10 +15,10 @@ $auth = new Authentication();
     <link rel="stylesheet" href="<?= SITE_URL ?>assets/bootstrap/css/animate.min.css">
     <link rel="icon" href="<?= SITE_URL ?>assets/img/vrms_logo.png">
     <script defer src="<?= SITE_URL ?>assets/icons/js/all.min.js"></script>
-    <script src="<?= SITE_URL ?>assets/bootstrap/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="<?= SITE_URL ?>assets/bootstrap/js/jquery-3.5.1.min.js"></script>
     <script src="<?= SITE_URL ?>assets/js/common.js"></script>
 </head>
-<body>
+<body id="body">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
         <a class="navbar-brand mr-0 mr-md-2" href="<?= SITE_URL ?>">

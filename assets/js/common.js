@@ -17,3 +17,21 @@ function switchAuth() {
         $(signinForm).addClass("d-none");
     })
 }
+
+$(function() {
+    $("#backtop").hide();
+    $(window).on("scroll",function(){
+        if($(this).scrollTop() > 300){
+            $("#backtop").show();
+        }
+
+        if($(this).scrollTop() < 300){
+            $("#backtop").hide();
+        }
+    })
+    $('#backtop').on( "click",function(){
+        $('#body').animate({
+            scrollTop: 0
+        }, 200);
+    });
+});
