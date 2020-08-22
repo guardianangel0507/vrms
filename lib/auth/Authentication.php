@@ -13,39 +13,50 @@ class Authentication
 
     public function authLogin($username, $password)
     {
-        $loginQuery = "SELECT userID FROM tb_users WHERE username = :username AND password = :password AND activeStatus = true";
+        $authErrors = array();
+        $loginQuery = "SELECT userID, userType, activeStatus FROM tb_users WHERE username = :username AND password = :password";
 //        $loginQuery = "SELECT userID  FROM tb_users WHERE username = 'amrameen769' AND password = '7025'";
         $this->dbo->query($loginQuery);
         $this->dbo->bind(':username', $username);
         $this->dbo->bind(':password', $password);
 //        return $this->dbo->fetchSingleResult();
         if ($user = $this->dbo->fetchSingleResult()) {
-            $token = $this->isUserLoggedIn($user->userID, $username);
-            if ($token === "") {
-                try {
-                    $token = bin2hex(random_bytes(32));
-                } catch (Exception $e) {
-                    consoleLogger("Authentication Failed, Token Error, Try Again" . $e->getMessage());
-                }
-                $tokenQuery = "INSERT INTO tb_auth SET userID = :userID, username = :username, token = :token, isLoggedIn = true";
-                $this->dbo->query($tokenQuery);
-                $this->dbo->bind(':userID', $user->userID);
-                $this->dbo->bind(':username', $username);
-                $this->dbo->bind(':token', $token);
-                if ($this->dbo->execute()) {
+            if($user->activeStatus) {
+                $token = $this->isUserLoggedIn($user->userID, $username);
+                if ($token === "") {
+                    try {
+                        $token = bin2hex(random_bytes(32));
+                    } catch (Exception $e) {
+                        consoleLogger("Authentication Failed, Token Error, Try Again" . $e->getMessage());
+                    }
+                    $tokenQuery = "INSERT INTO tb_auth SET userID = :userID, username = :username, token = :token, isLoggedIn = true";
+                    $this->dbo->query($tokenQuery);
+                    $this->dbo->bind(':userID', $user->userID);
+                    $this->dbo->bind(':username', $username);
+                    $this->dbo->bind(':token', $token);
+                    if ($this->dbo->execute()) {
+                        consoleLogger("Authenticated");
+                        $user->username = $username;
+                        $user->token = $token;
+                        return $user;
+                    } else return false;
+                } else {
                     consoleLogger("Authenticated");
                     $user->username = $username;
                     $user->token = $token;
                     return $user;
-                } else return 0;
+                }
             } else {
-                consoleLogger("Authenticated");
-                $user->username = $username;
-                $user->token = $token;
-                return $user;
+                array_push($authErrors, "User is not yet Approved");
+                $_SESSION['errors']['authErrors'] = $authErrors;
+                print_r($authErrors);
+                return false;
             }
         } else {
-            return 0;
+            array_push($authErrors, "Authentication Failed, Invalid Username or Password");
+            print_r($authErrors);
+            $_SESSION['errors']['authErrors'] = $authErrors;
+            return false;
         }
     }
 

@@ -12,6 +12,7 @@ $auth = new Authentication();
     <link rel="stylesheet" href="<?= SITE_URL ?>assets/css/common.css">
     <link rel="stylesheet" href="<?= SITE_URL ?>assets/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="<?= SITE_URL ?>assets/icons/css/all.min.css">
+    <link rel="stylesheet" href="<?= SITE_URL ?>assets/bootstrap/css/animate.min.css">
     <link rel="icon" href="<?= SITE_URL ?>assets/img/vrms_logo.png">
     <script defer src="<?= SITE_URL ?>assets/icons/js/all.min.js"></script>
     <script src="<?= SITE_URL ?>assets/bootstrap/js/jquery-3.5.1.slim.min.js"></script>
