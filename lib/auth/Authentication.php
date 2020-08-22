@@ -13,7 +13,7 @@ class Authentication
 
     public function authLogin($username, $password)
     {
-        $loginQuery = "SELECT userID FROM tb_users WHERE username = :username AND password = :password";
+        $loginQuery = "SELECT userID FROM tb_users WHERE username = :username AND password = :password AND activeStatus = true";
 //        $loginQuery = "SELECT userID  FROM tb_users WHERE username = 'amrameen769' AND password = '7025'";
         $this->dbo->query($loginQuery);
         $this->dbo->bind(':username', $username);
@@ -65,6 +65,16 @@ class Authentication
         } else {
             return "";
         }
+    }
+
+    public function authLogout($userID, $username, $token)
+    {
+        $updateLoginQuery = "UPDATE tb_auth SET isLoggedIn = false WHERE userID = :userID AND username = :username AND token = :token";
+        $this->dbo->query($updateLoginQuery);
+        $this->dbo->bind(':userID', $userID);
+        $this->dbo->bind(':username', $username);
+        $this->dbo->bind(':token', $token);
+        $this->dbo->execute() ? consoleLogger("Logged out Successfully") : consoleLogger("Logout Error");
     }
 
     public function getUserTypes()
