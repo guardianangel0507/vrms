@@ -1,17 +1,6 @@
 <?php
-$authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-md-auto">
-                <li class="nav-item">
-                    <button id="signin" class="btn btn-primary nav-button">Sign In<span class="sr-only">(current)</span>
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button id="signup" class="btn btn-outline-primary nav-button">Sign Up</button>
-                </li>
-            </ul>
-        </div>';
+$auth = new Authentication();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +20,7 @@ $authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
-        <a class="navbar-brand mr-0 mr-md-2" href="<?=SITE_URL?>">
+        <a class="navbar-brand mr-0 mr-md-2" href="<?= SITE_URL ?>">
             <img src="<?= SITE_URL ?>assets/img/vrms_logo.png" width="30" height="30"
                  class="d-inline-block align-top" alt="vrms-logo">
             VRMS

@@ -21,11 +21,10 @@
 
 // Authentication Class Testing
 $auth = new Authentication();
-$user = $auth->authLogin("amrameen769", "7025");
+$user = $auth->authLogin("guardianangel0507", "0507");
 
 echo "Logged in UserID: <br>";
 print_r($user);
-
 // DataUtility Class Testing
 $userTypeData = $auth->getUserTypes();
 echo "<br> Before extraction: <br>";
