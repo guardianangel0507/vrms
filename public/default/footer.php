@@ -1,5 +1,5 @@
-<footer class="footer">
-    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
+<footer class="footer fixed-bottom">
+    <p>VRMS @ Copyright 2020
     </p>
 </footer>
 <p class="fixed-bottom">
