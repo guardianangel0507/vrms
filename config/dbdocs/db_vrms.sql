@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 26, 2020 at 07:58 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Generation Time: Aug 22, 2020 at 01:27 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -240,6 +240,28 @@ CREATE TABLE `tbr_testDriveRecords` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_auth`
+--
+
+CREATE TABLE `tb_auth` (
+  `id` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `isLoggedIn` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_auth`
+--
+
+INSERT INTO `tb_auth` (`id`, `userID`, `username`, `token`, `isLoggedIn`) VALUES
+(1, 1, 'amrameen769', '5e8f16a46ec52ee8cbc663c97d5f9e75b361c907921dcda253e3b88f77993be1', 1),
+(2, 4, 'guardianangel0507', '58a806882c9f33b6d0b9a65c43dbe6bb756af67f9e1d69a5f93bf21b71816f3d', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_colors`
 --
 
@@ -327,8 +349,9 @@ CREATE TABLE `tb_users` (
 
 INSERT INTO `tb_users` (`userID`, `name`, `username`, `email`, `password`, `phoneNo`, `address`, `userType`, `activeStatus`) VALUES
 (1, 'Al Ameen AR', 'amrameen769', 'amrameen769@gmail.com', '7025', 7025886445, 'Al Ameen Manzil', 'manufacturer', 1),
-(2, 'Popular Vehicles', 'popularvh', 'popularvh@gmail.com', '1234', 7845123265, 'bla bla bla', 'dealer', 1),
-(3, 'Rosbee', 'rosbee05', 'rosbee0506@gmail.com', '1234', 8606107201, 'Chittayam House', 'manufacturer', 1);
+(2, 'Popular Vehicles', 'popularvh', 'popularvh@gmail.com', '1234', 7845123265, 'bla bla bla', 'dealer', 0),
+(3, 'Rosbee', 'rosbee05', 'rosbee0506@gmail.com', '1234', 8606107201, 'Chittayam House', 'manufacturer', 0),
+(4, 'Richard Brooks', 'guardianangel0507', 'guardianangel0507@gmail.com', '0507', 8943199646, 'Willington Mansion', 'customer', 1);
 
 -- --------------------------------------------------------
 
@@ -467,6 +490,14 @@ ALTER TABLE `tbr_testDriveRecords`
   ADD KEY `DEALER_FOREIGN_INDEX` (`dealerID`),
   ADD KEY `VEHICLE_FOREIGN_INDEX` (`vehicleID`),
   ADD KEY `SELLOUTLET_FOREIGN_INDEX` (`sellingOutletID`);
+
+--
+-- Indexes for table `tb_auth`
+--
+ALTER TABLE `tb_auth`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`),
+  ADD UNIQUE KEY `IS_AUTHENTICATED` (`userID`) USING BTREE;
 
 --
 -- Indexes for table `tb_colors`
@@ -610,6 +641,12 @@ ALTER TABLE `tbr_testDriveRecords`
   MODIFY `testdriveID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tb_auth`
+--
+ALTER TABLE `tb_auth`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `tb_colors`
 --
 ALTER TABLE `tb_colors`
@@ -643,7 +680,7 @@ ALTER TABLE `tb_sellingOutlets`
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_vehicles`
@@ -747,6 +784,12 @@ ALTER TABLE `tbr_testDriveRecords`
   ADD CONSTRAINT `DEALERS_FOREIGN_CONSRAINT_TESTDRIVE` FOREIGN KEY (`dealerID`) REFERENCES `tb_dealers` (`dealerID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `SELLOUTLETS_FOREIGN_CONSRAINT_TESTDRIVE` FOREIGN KEY (`sellingOutletID`) REFERENCES `tb_sellingOutlets` (`sellingOutletID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `VEHICLES_FOREIGN_CONSRAINT_TESTDRIVE` FOREIGN KEY (`vehicleID`) REFERENCES `tb_vehicles` (`vehicleID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tb_auth`
+--
+ALTER TABLE `tb_auth`
+  ADD CONSTRAINT `IS_AUTHENTICATED` FOREIGN KEY (`userID`) REFERENCES `tb_users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_customers`
