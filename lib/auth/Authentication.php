@@ -48,14 +48,14 @@ class Authentication
                 }
             } else {
                 array_push($authErrors, "User is not yet Approved");
-                $_SESSION['errors']['authErrors'] = $authErrors;
+                $_SESSION['messages']['authErrors'] = $authErrors;
                 print_r($authErrors);
                 return false;
             }
         } else {
             array_push($authErrors, "Authentication Failed, Invalid Username or Password");
             print_r($authErrors);
-            $_SESSION['errors']['authErrors'] = $authErrors;
+            $_SESSION['messages']['authErrors'] = $authErrors;
             return false;
         }
     }
@@ -97,17 +97,19 @@ class Authentication
 
     public function authRegister($authData)
     {
-        $regQuery = "INSERT INTO tb_users SET username = :username, password = :password, name = :name, email = :email, phoneNo = :phoneNo";
+        $regQuery = "INSERT INTO tb_users SET username = :username, password = :password, name = :name, email = :email, phoneNo = :phoneNo, address = :address, userType = :userType";
         $this->dbo->query($regQuery);
         $this->dbo->bind(':username', $authData['username']);
         $this->dbo->bind(':password', $authData['password']);
         $this->dbo->bind(':name', $authData['name']);
         $this->dbo->bind(':email', $authData['email']);
         $this->dbo->bind(':phoneNo', $authData['phoneNo']);
+        $this->dbo->bind(':address', $authData['address']);
+        $this->dbo->bind(':userType', $authData['userType']);
         if ($this->dbo->execute()) {
-            echo "Insertion successful";
+            return true;
         } else {
-            echo "Insertion failed";
+            return false;
         }
     }
 }

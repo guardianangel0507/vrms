@@ -1,11 +1,20 @@
 <?php
 
 $errors = array();
-$errH = new ErrorHandler();
+$msgs = array();
+$msgH = new MessageHandler();
+$formName = "signin";
 
 if (isset($_SESSION['authorized']) and $_SESSION['authorized'] === false) {
-    $errors = isset($_SESSION['errors']['authErrors']) ? $_SESSION['errors']['authErrors'] : null;
+    $errors = isset($_SESSION['messages']['authErrors']) ? $_SESSION['messages']['authErrors'] : null;
+    unset($_SESSION['messages']['authErrors']);
+    $msgs = isset($_SESSION['messages']['authSuccess']) ? $_SESSION['messages']['authSuccess'] : null;
+    unset($_SESSION['messages']['authSuccess']);
 }
+
+if (isset($_SESSION['formName'])) $formName = $_SESSION['formName'];
+unset($_SESSION['formName']);
+
 ?>
 
 <style>
@@ -28,7 +37,7 @@ if (isset($_SESSION['authorized']) and $_SESSION['authorized'] === false) {
         z-index: 2;
     }
 
-    .form-signin input[type="email"] {
+    .form-signin input[type="text"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
@@ -39,24 +48,113 @@ if (isset($_SESSION['authorized']) and $_SESSION['authorized'] === false) {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
+
+    .form-signup {
+        padding: 15px;
+    }
+
+    .form-signup .form-control {
+        margin: 5px;
+    }
+
+    .show-icon {
+        margin: auto;
+        cursor: hand;
+    }
 </style>
 <div class="container text-center">
-    <form id="signin-form" class="animate__animated animate__fadeIn d-block form-signin"
-          action="<?= SITE_URL . 'lib/scripts/login.php' ?>" method="post">
-        <img class="mb-4" src="<?= SITE_URL ?>assets/img/vrms_logo.png" alt="vrms-logo" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Log In to Continue</h1>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
-               autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-        <?php $errH->displayErrors($errors); ?>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign in</button>
-    </form>
-
-    <form id="signup-form" class="d-none">
-        Signup
-    </form>
+    <div id="signin-form"
+         class=" animate__animated animate__fadeIn <?= $formName == 'signin' ? "d-block" : "d-none" ?> form-signin">
+        <form action="<?= SITE_URL . 'lib/scripts/login.php' ?>" method="post">
+            <img class="mb-4" src="<?= SITE_URL ?>assets/img/vrms_logo.png" alt="vrms-logo" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Sign In to Continue</h1>
+            <label for="inputUsername" class="sr-only">Username</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required
+                   autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password"
+                   required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign In</button>
+        </form>
+        <?php
+        if($formName == 'signin' ) {
+            $msgH->displayErrors($errors);
+            $errors = null;
+            $msgH->displayMessages($msgs);
+            $msgs = null;
+        }
+        ?>
+        <button class="btn btn-outline-primary" id="signup-btn">No Account? Create one.</button>
+    </div>
+    <div id="signup-form"
+         class=" animate__animated animate__fadeIn <?= $formName == 'signup' ? "d-block" : "d-none" ?> form-signup">
+        <form action="<?= SITE_URL . 'lib/scripts/register.php' ?>" method="post" autocomplete="off">
+            <img class="mb-4" src="<?= SITE_URL ?>assets/img/vrms_logo.png" alt="vrms-logo" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Sign Up to Continue</h1>
+            <div class="d-flex flex-row">
+                <label for="inputFullName" class="sr-only">Full Name</label>
+                <input type="text" id="inputFullName" class="form-control" placeholder="Full Name" name="name"
+                       required
+                       autofocus="">
+                <label for="inputEmail" class="sr-only">Email</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email"
+                       name="email"
+                       required>
+            </div>
+            <div class="d-flex flex-row">
+                <label for="inputPhone" class="sr-only">Phone Number</label>
+                <input type="number" id="inputPhone" class="form-control" placeholder="Phone Number" name="phoneNo"
+                       required
+                       autofocus="">
+            </div>
+            <div class="d-flex flex-row">
+                <label for="inputAddress" class="sr-only">Address</label>
+                <input type="text" id="inputAddress" class="form-control" placeholder="Address"
+                       name="address"
+                       required>
+            </div>
+            <div class="d-flex flex-row">
+                <label for="inputUname" class="sr-only">Username</label>
+                <input type="text" id="inputUname" class="form-control" placeholder="Username"
+                       name="username"
+                       required>
+                <label for="inputPass" class="sr-only">Password</label>
+                <input type="password" id="inputPass" class="form-control" placeholder="Password"
+                       name="password"
+                       required>
+                <label for="inputCPassword" class="sr-only">Confirm Password</label>
+                <input type="password" id="inputCPassword" class="form-control" placeholder="Confirm Password"
+                       name="cPassword"
+                       required>
+                <button id="showPass" class="btn btn-outlined-primary show-icon"><i id="eyeicon" class="fa fa-eye"></i>
+                </button>
+            </div>
+            <div class="d-flex flex-row">
+                <div class="form-check form-control">
+                    <input class="form-check-input" type="radio" name="userType" id="userType1" value="customer" checked>
+                    <label class="form-check-label" for="userType1">
+                        Customer
+                    </label>
+                </div>
+                <div class="form-check form-control">
+                    <input class="form-check-input" type="radio" name="userType" id="userType2" value="manufacturer">
+                    <label class="form-check-label" for="userType2">
+                        Manufacturer
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-lg btn-primary" type="submit" name="signup">Sign Up</button>
+        </form>
+        <?php
+        if($formName == 'signup' ) {
+            $msgH->displayErrors($errors);
+            $errors = null;
+            $msgH->displayMessages($msgs);
+            $msgs = null;
+        }
+        ?>
+        <button class="btn btn-outline-primary" id="signin-btn">Already have an Account? Sign In.</button>
+    </div>
 </div>
 <script>
     $(function () {

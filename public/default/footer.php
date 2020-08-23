@@ -1,4 +1,4 @@
-<footer class="footer fixed-bottom">
+<footer class="footer mt-auto py-3">
     <p>VRMS @ Copyright 2020
     </p>
 </footer>

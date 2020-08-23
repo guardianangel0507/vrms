@@ -11,4 +11,6 @@ if (isset($_POST['login'])) {
     }
 }
 
+$_SESSION['formName'] = "signin";
+
 header('Location:' . SITE_URL . 'public/default/home-route.php');

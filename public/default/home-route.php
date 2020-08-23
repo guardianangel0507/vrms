@@ -12,7 +12,7 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
                     </button>
                 </li>
                 <li class="nav-item">
-                    <button id="signup" class="btn btn-outline-primary nav-button">Sign Up</button>
+                    <button id="signup" class="btn btn-primary nav-button">Sign Up</button>
                 </li>
             </ul>
         </div>';
@@ -28,11 +28,50 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
             $customerHomeIndex->authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-md-auto">
                 <li class="nav-item">
-                    <a href="' . SITE_URL . 'lib/scripts/logout.php?id=' . $userData->userID . '" class="btn btn-outline-primary nav-button">Logout</a>
+                    <a href="' . SITE_URL . 'lib/scripts/logout.php?id=' . $userData->userID . '" class="btn btn-primary nav-button">Logout</a>
                 </li>
             </ul>
         </div>';
             echo $customerHomeIndex;
+            break;
+        case "manufacturer" :
+            $manufacturerHomeIndex = new Template(SITE_ROOT . "public/manufacturer/manufacturer-home.php");
+            $manufacturerHomeIndex->title = "VRMS Manufacturer's Home";
+            $manufacturerHomeIndex->userData = $userData;
+            $manufacturerHomeIndex->authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item">
+                    <a href="' . SITE_URL . 'lib/scripts/logout.php?id=' . $userData->userID . '" class="btn btn-primary nav-button">Logout</a>
+                </li>
+            </ul>
+        </div>';
+            echo $manufacturerHomeIndex;
+            break;
+        case "dealer" :
+            $dealerHomeIndex = new Template(SITE_ROOT . "public/dealer/dealer-home.php");
+            $dealerHomeIndex->title = "VRMS Dealer's Home";
+            $dealerHomeIndex->userData = $userData;
+            $dealerHomeIndex->authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item">
+                    <a href="' . SITE_URL . 'lib/scripts/logout.php?id=' . $userData->userID . '" class="btn btn-primary nav-button">Logout</a>
+                </li>
+            </ul>
+        </div>';
+            echo $dealerHomeIndex;
+            break;
+        case "admin" :
+            $adminHomeIndex = new Template(SITE_ROOT . "public/admin/admin-home.php");
+            $adminHomeIndex->title = "VRMS Admin's Home";
+            $adminHomeIndex->userData = $userData;
+            $adminHomeIndex->authNav = '<div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item">
+                    <a href="' . SITE_URL . 'lib/scripts/logout.php?id=' . $userData->userID . '" class="btn btn-primary nav-button">Logout</a>
+                </li>
+            </ul>
+        </div>';
+            echo $adminHomeIndex;
             break;
     }
 }

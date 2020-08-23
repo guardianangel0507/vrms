@@ -18,7 +18,7 @@ $auth = new Authentication();
     <script src="<?= SITE_URL ?>assets/bootstrap/js/jquery-3.5.1.min.js"></script>
     <script src="<?= SITE_URL ?>assets/js/common.js"></script>
 </head>
-<body id="body">
+<body id="body" class="d-flex flex-column h-100">
 <header>
     <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
         <a class="navbar-brand mr-0 mr-md-2" href="<?= SITE_URL ?>">
