@@ -8,6 +8,6 @@ For now, there is only one method, `consoleLogger($log)`, which is used to run t
 
 FYI: This kind of methods are used to implement javascript through PHP.
 
-Please refer [DataUtility](https://github.com/guardianangel0507/vrms/tree/development/lib/utility/DataUtility.php) class's Constructor for example.
+Please refer [DataUtility](DataUtility.php) class's Constructor for example.
 
 As we progress, new methods will be added.

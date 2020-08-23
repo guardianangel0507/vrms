@@ -20,7 +20,7 @@ Lets start explaining the methods.
 
 #### *__construct()*
 
-Every PDO connection requires a Data Source Name, which is the details about our database host (in our case, `localhost)` and database name(`db_vrms`). Though, we already defined these data as PHP Constants inside the [config.php](https://github.com/guardianangel0507/vrms/tree/development/config/config.php). And then, these constants are used to initialize the Database Properties of Database Class.
+Every PDO connection requires a Data Source Name, which is the details about our database host (in our case, `localhost)` and database name(`db_vrms`). Though, we already defined these data as PHP Constants inside the [config.php](../../config/config.php). And then, these constants are used to initialize the Database Properties of Database Class.
 
 ```php
 $dsn = "mysql:host=" . $this->db_host . ";dbname=" . $this->db_name;

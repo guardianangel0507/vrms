@@ -31,7 +31,7 @@ Then the **__set()** appends this "title" RTDM as a key-value pair inside the *$
 
 #### *__get($key)*
 
-When any RTDM is referenced from any of the Template Rendered file, for example here, in the [lander.html](https://github.com/guardianangel0507/vrms/tree/development/public/lander.html), we called the *$title* RTDM. 
+When any RTDM is referenced from any of the Template Rendered file, for example here, in the [lander.html](../../public/lander.html), we called the *$title* RTDM. 
 
 This fires a request to the *$indexTemplate* to retrieve the value of "title" key from *$args*, which passes $key(value as "title") to the **__get()** function. 
 
@@ -84,7 +84,7 @@ So, `basename($this->templatePath)` returns `lander.html` as the file name.
 
 Since, we changed the directory to the corresponding file's directory using `chdir()`, we just need to use the name of the file to get it included in the PHP Script.
 
-So by this statement, we includes the file in `$templatePath`  into the Display Buffer of the corresponding Template Object, for example, here, in the `$indexTemplate` Object's Display Buffer we included the [lander.html](https://github.com/guardianangel0507/vrms/tree/development/public/lander.html) file. 
+So by this statement, we includes the file in `$templatePath`  into the Display Buffer of the corresponding Template Object, for example, here, in the `$indexTemplate` Object's Display Buffer we included the [lander.html](../../public/lander.html) file. 
 
 Now,
 
@@ -92,6 +92,6 @@ Now,
 return ob_get_clean();
 ```
 
-`ob_get_clean()` method retrieves the contents in [lander.html](https://github.com/guardianangel0507/vrms/tree/development/public/lander.html) and cleans the output buffer and returns those contents to the Template Object, so that, the `echo` can print Template Object, in our case, `$indexTemplate`. Here at this point, the Template Objects are considered as normal PHP Strings, because output buffers are "encoded strings".
+`ob_get_clean()` method retrieves the contents in [lander.html](../../public/lander.html) and cleans the output buffer and returns those contents to the Template Object, so that, the `echo` can print Template Object, in our case, `$indexTemplate`. Here at this point, the Template Objects are considered as normal PHP Strings, because output buffers are "encoded strings".
 
-This is just an example definition, for which I used `$indexTemplate` in [index.php](https://github.com/guardianangel0507/vrms/tree/development/index.php). You can use this Template Class for other PHP pages also. For another example, check [home-route.php](https://github.com/guardianangel0507/vrms/tree/development/public/default/home-route.php). 
+This is just an example definition, for which I used `$indexTemplate` in [index.php](../../index.php). You can use this Template Class for other PHP pages also. For another example, check [home-route.php](../../public/default/home-route.php). 
