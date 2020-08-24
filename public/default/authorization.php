@@ -1,19 +1,13 @@
 <?php
 
-$errors = array();
-$msgs = array();
-$msgH = new MessageHandler();
 $formName = "signin";
-
-if (isset($_SESSION['authorized']) and $_SESSION['authorized'] === false) {
-    $errors = isset($_SESSION['messages']['authErrors']) ? $_SESSION['messages']['authErrors'] : null;
-    unset($_SESSION['messages']['authErrors']);
-    $msgs = isset($_SESSION['messages']['authSuccess']) ? $_SESSION['messages']['authSuccess'] : null;
-    unset($_SESSION['messages']['authSuccess']);
-}
+$authData = array();
 
 if (isset($_SESSION['formName'])) $formName = $_SESSION['formName'];
 unset($_SESSION['formName']);
+
+if (isset($_SESSION['authData'])) $authData = $_SESSION['authData'];
+unset($_SESSION['authData']);
 
 ?>
 
@@ -77,11 +71,17 @@ unset($_SESSION['formName']);
             <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Sign In</button>
         </form>
         <?php
-        if($formName == 'signin' ) {
-            $msgH->displayErrors($errors);
-            $errors = null;
-            $msgH->displayMessages($msgs);
-            $msgs = null;
+        if ($formName == 'signin') {
+            if (isset($msgH)) {
+                if (isset($errors)) {
+                    $msgH->displayErrors($errors);
+                }
+                $errors = null;
+                if (isset($msgs)) {
+                    $msgH->displayMessages($msgs);
+                }
+                $msgs = null;
+            }
         }
         ?>
         <button class="btn btn-outline-primary" id="signup-btn">No Account? Create one.</button>
@@ -95,33 +95,33 @@ unset($_SESSION['formName']);
                 <label for="inputFullName" class="sr-only">Full Name</label>
                 <input type="text" id="inputFullName" class="form-control" placeholder="Full Name" name="name"
                        required
-                       autofocus="">
+                       autofocus="" value="<?php if (!empty($authData)) echo $authData['name'] ?>">
                 <label for="inputEmail" class="sr-only">Email</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email"
                        name="email"
-                       required>
+                       required value="<?php if (!empty($authData)) echo $authData['email'] ?>">
             </div>
             <div class="d-flex flex-row">
                 <label for="inputPhone" class="sr-only">Phone Number</label>
                 <input type="number" id="inputPhone" class="form-control" placeholder="Phone Number" name="phoneNo"
                        required
-                       autofocus="">
+                       autofocus="" value="<?php if (!empty($authData)) echo $authData['phoneNo'] ?>">
             </div>
             <div class="d-flex flex-row">
                 <label for="inputAddress" class="sr-only">Address</label>
                 <input type="text" id="inputAddress" class="form-control" placeholder="Address"
                        name="address"
-                       required>
+                       required value="<?php if (!empty($authData)) echo $authData['address'] ?>">
             </div>
             <div class="d-flex flex-row">
                 <label for="inputUname" class="sr-only">Username</label>
                 <input type="text" id="inputUname" class="form-control" placeholder="Username"
                        name="username"
-                       required>
+                       required value="<?php if (!empty($authData)) echo $authData['username'] ?>">
                 <label for="inputPass" class="sr-only">Password</label>
                 <input type="password" id="inputPass" class="form-control" placeholder="Password"
                        name="password"
-                       required>
+                       required value="<?php if (!empty($authData)) echo $authData['password'] ?>">
                 <label for="inputCPassword" class="sr-only">Confirm Password</label>
                 <input type="password" id="inputCPassword" class="form-control" placeholder="Confirm Password"
                        name="cPassword"
@@ -131,13 +131,33 @@ unset($_SESSION['formName']);
             </div>
             <div class="d-flex flex-row">
                 <div class="form-check form-control">
-                    <input class="form-check-input" type="radio" name="userType" id="userType1" value="customer" checked>
+                    <input class="form-check-input" type="radio" name="userType" id="userType1" value="customer"
+                        <?php
+                        if (!empty($authData)) {
+                            if ($authData['userType'] == 'customer') {
+                                echo 'checked';
+                            } else {
+                                echo 'checked';
+                            }
+                        } else {
+                            echo 'checked';
+                        }
+                        ?>
+                    >
                     <label class="form-check-label" for="userType1">
                         Customer
                     </label>
                 </div>
                 <div class="form-check form-control">
-                    <input class="form-check-input" type="radio" name="userType" id="userType2" value="manufacturer">
+                    <input class="form-check-input" type="radio" name="userType" id="userType2" value="manufacturer"
+                        <?php
+                        if (!empty($authData)) {
+                            if ($authData['userType'] == 'manufacturer') {
+                                echo 'checked';
+                            }
+                        }
+                        ?>
+                    >
                     <label class="form-check-label" for="userType2">
                         Manufacturer
                     </label>
@@ -146,11 +166,17 @@ unset($_SESSION['formName']);
             <button class="btn btn-lg btn-primary" type="submit" name="signup">Sign Up</button>
         </form>
         <?php
-        if($formName == 'signup' ) {
-            $msgH->displayErrors($errors);
-            $errors = null;
-            $msgH->displayMessages($msgs);
-            $msgs = null;
+        if ($formName == 'signup') {
+            if (isset($msgH)) {
+                if (isset($errors)) {
+                    $msgH->displayErrors($errors);
+                }
+                $errors = null;
+                if (isset($msgs)) {
+                    $msgH->displayMessages($msgs);
+                }
+                $msgs = null;
+            }
         }
         ?>
         <button class="btn btn-outline-primary" id="signin-btn">Already have an Account? Sign In.</button>

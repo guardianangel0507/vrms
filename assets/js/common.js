@@ -67,6 +67,6 @@ $(function () {
     })
 })
 
-$(function(){
+$(function () {
     $('.toast').toast('show');
 });

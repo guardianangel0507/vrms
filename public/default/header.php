@@ -1,5 +1,5 @@
 <?php
-$auth = new Authentication();
+$msgH = new MessageHandler();
 ?>
 <!DOCTYPE html>
 <html lang="en">

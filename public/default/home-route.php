@@ -2,6 +2,12 @@
 require_once '../../config/init.php';
 require_once '../../lib/utility/helpers.php';
 
+$errors = isset($_SESSION['messages']['authErrors']) ? $_SESSION['messages']['authErrors'] : null;
+unset($_SESSION['messages']['authErrors']);
+
+$msgs = isset($_SESSION['messages']['authSuccess']) ? $_SESSION['messages']['authSuccess'] : null;
+unset($_SESSION['messages']['authSuccess']);
+
 if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
     $defaultHomeIndex = new Template(SITE_ROOT . "public/default/default-home.php");
     $defaultHomeIndex->title = "VRMS Home";
@@ -16,6 +22,8 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
                 </li>
             </ul>
         </div>';
+    $defaultHomeIndex->errors = $errors;
+    $defaultHomeIndex->msgs = $msgs;
     echo $defaultHomeIndex;
 } else {
     $userData = $_SESSION['userData'];
@@ -32,6 +40,8 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
                 </li>
             </ul>
         </div>';
+            $customerHomeIndex->errors = $errors;
+            $customerHomeIndex->msgs = $msgs;
             echo $customerHomeIndex;
             break;
         case "manufacturer" :
@@ -45,6 +55,8 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
                 </li>
             </ul>
         </div>';
+            $manufacturerHomeIndex->errors = $errors;
+            $manufacturerHomeIndex->msgs = $msgs;
             echo $manufacturerHomeIndex;
             break;
         case "dealer" :
@@ -71,6 +83,8 @@ if (!isset($_SESSION['authorized']) || $_SESSION['authorized'] === false) {
                 </li>
             </ul>
         </div>';
+            $adminHomeIndex->errors = $errors;
+            $adminHomeIndex->msgs = $msgs;
             echo $adminHomeIndex;
             break;
     }

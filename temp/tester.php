@@ -23,7 +23,7 @@
 $auth = new Authentication();
 $user = $auth->authLogin("guardianangel0507", "0507");
 
-//$auth->authLogout($user->userID, $user->username, $user->token);
+$auth->authLogout($user->userID, $user->username, $user->token);
 
 echo "Logged in UserID: <br>";
 print_r($user);
