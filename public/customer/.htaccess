@@ -1,4 +1,4 @@
-DirectoryIndex admin-route.php
+DirectoryIndex customer-route.php
 
 # enable apache rewrite engine
 RewriteEngine on
