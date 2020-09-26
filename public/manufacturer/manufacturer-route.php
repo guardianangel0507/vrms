@@ -3,7 +3,8 @@ require_once '../../config/init.php';
 require_once '../../lib/utility/helpers.php';
 
 $auth = new Authentication();
-!$auth->isAuthorized('manufacturer') ? header("Location:" . SITE_URL . "public/default/home-route.php") : null;
+$dbo = new Database();
+!$auth->isAuthorized('manufacturer') ? header("Location:" . SITE_URL . "public/default/home-route.php") : $userData = $_SESSION['userData'];
 
 $userDetail = isset($_SESSION['userDetail']) ? $_SESSION['userDetail'] : null;
 
@@ -23,6 +24,22 @@ switch ($uri) {
                 </li>';
         echo $manufacPanelIndex;
         break;
+    case "add-dealers":
+        $addDealerIndex = new Template(SITE_ROOT . "public/manufacturer/add-dealers.php");
+        $addDealerIndex->title = "Add Dealers";
+        $addDealerIndex->userData = isset($userData) ? $userData : null;
+        $addDealerIndex->userDetail = $userDetail;
+        $dbo->query("SELECT userA.userID, userA.name, userA.username, userA.email, userA.phoneNo, userA.address, userA.userType FROM tb_users as userA INNER JOIN tb_dealers on userA.userID = tb_dealers.dealerID WHERE userA.userType = 'dealer' AND tb_dealers.manufacturerID = :manufacturerID");
+        $dbo->bind(':manufacturerID', $userData->userID);
+        $addDealerIndex->dealResults = $dbo->fetchMultipleResults();
+        $addDealerIndex->authNav = '<li class="nav-item">
+                    <a href="' . SITE_URL . 'public/manufacturer"
+                       class="nav-link">Manufacturer Panel</a>
+                </li>';
+        echo $addDealerIndex;
+        break;
     default:
-        null;
+        $notFoundIndex = new Template(SITE_ROOT . "public/default/404-error.php");
+        $notFoundIndex-> title = "Error 404";
+        echo $notFoundIndex;
 }

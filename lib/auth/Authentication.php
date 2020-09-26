@@ -39,6 +39,7 @@ class Authentication
             $addDealer = "INSERT INTO tb_users SET username = :username, password = :password, name = :name, email = :email, phoneNo = :phoneNo, address = :address, userType = :userType";
             $this->dbo->query($addDealer);
             foreach ($userData as $key => $data) {
+                if($key == 'manufacturerID') continue;
                 $this->dbo->bind(":$key", $data);
             }
             if ($this->dbo->execute()) {

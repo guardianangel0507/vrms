@@ -46,7 +46,7 @@ $auth = new Authentication();
     </nav>
 </header>
 <?php
-if (isset($msgH) && isset($userData)) {
+if (isset($msgH) && isset($userData) ) {
     $msgH->displayErrors();
     $msgH->displayMessages();
 }
