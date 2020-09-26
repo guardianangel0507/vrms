@@ -11,7 +11,7 @@ if (isset($_SESSION['approve_uri'])) {
         $userID = number_format($split_action[2]);
         $userType = $split_action[1];
         if ($userType === "manufacturer") {
-            $dbo->query("UPDATE tb_users SET activeStatus = true WHERE userID = :userID AND userType = :userType");
+            $dbo->query("UPDATE tb_users SET activeStatus = true WHERE userID = :userID AND userType = :userType AND activeStatus = false");
             $dbo->bind(":userID", $userID);
             $dbo->bind(":userType", $userType);
             if ($dbo->execute()) {
@@ -20,7 +20,7 @@ if (isset($_SESSION['approve_uri'])) {
                 header("Location:" . SITE_URL . 'public/admin/error');
             }
         } else if ($userType === "dealer") {
-            $dbo->query("UPDATE tb_users SET activeStatus = true WHERE userID = :userID AND userType = :userType");
+            $dbo->query("UPDATE tb_users SET activeStatus = true WHERE userID = :userID AND userType = :userType AND activeStatus = false");
             $dbo->bind(":userID", $userID);
             $dbo->bind(":userType", $userType);
             if ($dbo->execute()) {
