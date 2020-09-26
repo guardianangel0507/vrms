@@ -1,17 +1,10 @@
 <?php include SITE_ROOT . 'public/default/header.php'; ?>
-CUSTOMER - <?php if (isset($userData)) {
-    print_r($userData);
-} ?>
 <?php
+$_SESSION['userDetail'] = $userDetail = $auth->findUserByID($userData->userID);
 if (isset($msgH)) {
-    if (isset($errors)) {
-        $msgH->displayErrors($errors);
-    }
-    $errors = null;
-    if (isset($msgs)) {
-        $msgH->displayMessages($msgs);
-    }
-    $msgs = null;
+    $msgH->displayErrors();
+    $msgH->displayMessages();
 }
 ?>
+<?php include SITE_ROOT . 'public/customer/customer-lander.php'; ?>
 <?php include SITE_ROOT . 'public/default/footer.php'; ?>

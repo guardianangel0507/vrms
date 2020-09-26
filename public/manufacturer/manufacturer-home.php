@@ -1,3 +1,10 @@
 <?php include SITE_ROOT . 'public/default/header.php'; ?>
-MANUFACTURER - <?php print_r($userData) ?>
+<?php
+$_SESSION['userDetail'] = $userDetail = $auth->findUserByID($userData->userID);
+if (isset($msgH)) {
+    $msgH->displayErrors();
+    $msgH->displayMessages();
+}
+?>
+<?php include SITE_ROOT . 'public/manufacturer/manufacturer-lander.php'; ?>
 <?php include SITE_ROOT . 'public/default/footer.php'; ?>

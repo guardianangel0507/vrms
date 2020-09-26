@@ -9,8 +9,10 @@ class MessageHandler
         consoleLogger("Message Handler Initialized");
     }
 
-    public function displayErrors($errors)
+    public function displayErrors()
     {
+        $errors = isset($_SESSION['messages']['authErrors']) ? $_SESSION['messages']['authErrors'] : null;
+        unset($_SESSION['messages']['authErrors']);
         if (!empty($errors)) : ?>
             <?php foreach ($errors as $error) : ?>
                 <div class='animate__animated animate__fadeIn alert alert-danger'
@@ -19,8 +21,10 @@ class MessageHandler
         <?php endif;
     }
 
-    public function displayMessages($msgs)
+    public function displayMessages()
     {
+        $msgs = isset($_SESSION['messages']['authSuccess']) ? $_SESSION['messages']['authSuccess'] : null;
+        unset($_SESSION['messages']['authSuccess']);
         if (!empty($msgs)) : ?>
             <?php foreach ($msgs as $msg) : ?>
                 <div class='animate__animated animate__fadeIn alert alert-success'

@@ -73,14 +73,7 @@ unset($_SESSION['authData']);
         <?php
         if ($formName == 'signin') {
             if (isset($msgH)) {
-                if (isset($errors)) {
-                    $msgH->displayErrors($errors);
-                }
-                $errors = null;
-                if (isset($msgs)) {
-                    $msgH->displayMessages($msgs);
-                }
-                $msgs = null;
+                $msgH->displayErrors();
             }
         }
         ?>
@@ -168,14 +161,8 @@ unset($_SESSION['authData']);
         <?php
         if ($formName == 'signup') {
             if (isset($msgH)) {
-                if (isset($errors)) {
-                    $msgH->displayErrors($errors);
-                }
-                $errors = null;
-                if (isset($msgs)) {
-                    $msgH->displayMessages($msgs);
-                }
-                $msgs = null;
+                $msgH->displayErrors();
+                $msgH->displayMessages();
             }
         }
         ?>
