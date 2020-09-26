@@ -3,6 +3,7 @@ require_once '../../config/init.php';
 require_once '../../lib/utility/helpers.php';
 
 $auth = new Authentication();
+$dbo = new Database();
 !$auth->isAuthorized("admin") ? header("Location:" . SITE_URL . "public/default/home-route.php") : $userData = $_SESSION['userData'];
 
 $userDetail = isset($_SESSION['userDetail']) ? $_SESSION['userDetail'] : null;
