@@ -4,6 +4,6 @@
     <hr class="my-4">
     <p>You are a Manufacturer in VRMS System</p>
     <p class="lead">
-        <a class="btn btn-primary btn-lg" href="<?= SITE_URL."public/manufacturer/manufacturer-route.php" ?>" role="button">Go to Manufacturer's Dashboard</a>
+        <a class="btn btn-primary btn-lg" href="<?= SITE_URL."public/manufacturer" ?>" role="button">Go to Manufacturer's Dashboard</a>
     </p>
 </div>
