@@ -40,7 +40,15 @@ $dtu = new DataUtility();
 $userTypes = $dtu->extractData($userTypeData, "userType");
 echo "<br> After extraction: <br>";
 print_r($userTypes);
+//
+//$dbo = new Database();
+//$dbo->query("INSERT INTO tb_colors SET color = 'Brownish Red'");
+//$colorID = $dbo->executeWithReturnID();
+//print_r("Color ID = " . $colorID);
 
+$dbC = new Database();
+$dbC->query("SELECT COUNT(color) as colorcount FROM tb_colors WHERE color LIKE 'Pearl Black'");
+print_r($dbC->fetchSingleResult()->colorcount);
 //$authData = array(
 //    'username' => "guardianangel0507",
 //    'password' => "0507",

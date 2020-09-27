@@ -81,6 +81,13 @@ class Database
         return $this->db_stmt->execute();
     }
 
+    public function executeWithReturnID(){
+		if($this->db_stmt->execute()){
+			return $this->db_handler->lastInsertId();
+		}
+		return 0;
+	}
+
     public function fetchMultipleResults()
     {
         $this->execute();
