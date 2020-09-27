@@ -6,16 +6,6 @@ $formName = 'add_dealer';
 if (isset($_SESSION['authData'])) $authData = $_SESSION['authData'];
 unset($_SESSION['authData']);
 ?>
-
-    <style>
-        .form-control {
-            margin: 5px;
-        }
-
-        .form-signup {
-            padding: 15px;
-        }
-    </style>
     <div class="container">
         <div class="form-signup">
             <form method="post" class="text-center" action="<?= SITE_URL ?>lib/scripts/create-dealer.php">
@@ -76,16 +66,18 @@ unset($_SESSION['authData']);
                 </thead>
                 <tbody>
                 <?php if (isset($dealResults)) : ?>
-                    <?php $i = 0;
-                    foreach ($dealResults as $dealer) : ?>
-                        <tr>
-                            <td><?= ++$i ?></td>
-                            <td><?= $dealer->name ?></td>
-                            <td><?= $dealer->email ?></td>
-                            <td><?= $dealer->phoneNo ?></td>
-                            <td><?= $dealer->address ?></td>
+                <?php $i = 0;
+                foreach ($dealResults
+
+                as $dealer) : ?>
+                <tr>
+                    <td><?= ++$i ?></td>
+                    <td><?= $dealer->name ?></td>
+                    <td><?= $dealer->email ?></td>
+                    <td><?= $dealer->phoneNo ?></td>
+                    <td><?= $dealer->address ?></td>
                     <?php endforeach ?>
-                <?php endif ?>
+                    <?php endif ?>
                 </tbody>
             </table>
         </div>

@@ -38,6 +38,20 @@ switch ($uri) {
                 </li>';
         echo $addDealerIndex;
         break;
+    case "add-vehicles":
+        $addVehicleIndex = new Template(SITE_ROOT . "public/manufacturer/add-vehicles.php");
+        $addVehicleIndex->title = "Add Vehicles";
+        $addVehicleIndex->userData = isset($userData) ? $userData : null;
+        $addVehicleIndex->userDetail = $userDetail;
+        $dbo->query("SELECT tb_users.name as manufacturerName, vehicleName, vehicleModel, onRoadPrice, mileage FROM tb_vehicles INNER JOIN tb_users ON tb_vehicles.manufacturerID = tb_users.userID WHERE manufacturerID = :manufacturerID");
+        $dbo->bind(":manufacturerID", $userData -> userID);
+        $addVehicleIndex->vehicleResults = $dbo->fetchMultipleResults();
+        $addVehicleIndex->authNav = '<li class="nav-item">
+                    <a href="' . SITE_URL . 'public/manufacturer"
+                       class="nav-link">Manufacturer Panel</a>
+                </li>';
+        echo $addVehicleIndex;
+        break;
     default:
         $notFoundIndex = new Template(SITE_ROOT . "public/default/404-error.php");
         $notFoundIndex-> title = "Error 404";
